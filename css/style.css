@@ -1,3 +1,59 @@
+/* logo */
+#logo {
+    width: 75px;
+}
+
+/* side logo */
+#side_logo {
+    height: 100%;
+}
+
+#skills li{
+    border: none;
+}
+
+footer {
+    background: #ddd;
+    padding: 20px;
+    margin: 20px 0px 5px 0px;
+}
+
+#pdf_holder {
+    padding-bottom: 100%;
+}
+
+#download_button {
+    color: #F7F7F7; 
+    background: #2D2D2D;
+}
+
+#side_link {
+    background:#2D2D2D; 
+    color:white;
+}
+
+#side_active {
+    background: #DCDCDC;
+}
+
+#open a {
+    color: black;
+}   
+
+#end_comment {
+    text-align: left; 
+    white-space: pre-line;
+}
+
+#proj_img {
+    max-width: 70%; 
+    margin: 0 auto;
+}
+
+
+
+
+
 /* Top button */
 #myBtn {
     display: none; /* Hidden by default */
