@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="../js/rtl.js"></script>
+
     <title>Resume - Wootae Alan Song</title>
   </head>
   <body>
@@ -19,7 +20,7 @@
             <h1 class="text-center">Wootae Alan Song</h1>
         </header>
     
-        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse" style="left:0">
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -48,79 +49,52 @@
             </div>
         </nav> 
 
-
-
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-2">      
+                <div class="col-sm-2">      
                 <!-- menu -->
-                    <div id="MainMenu" style="width: 100%">
-                        <div class="list-group list-group-flush" id="sidenav">
-                        <a href="#demo3" class="list-group-item three" style="background:#000000;" data-toggle="collapse" data-parent="#MainMenu ">Real Time Laundry<i class="fa fa-caret-down"></i></a>
+                    <div id="MainMenu">
+                        <div class="list-group panel">
+                        <a href="#demo3" class="list-group-item list-group-item-success three" data-toggle="collapse" data-parent="#MainMenu ">Real Time Laundry<i class="fa fa-caret-down"></i></a>
                         <div class="collapse" id="demo3">
-                            <a href="real_time_laundry.html" class="list-group-item">Description</a>
+                            <a href="real_time_laundry.html" class="list-group-item" style="max-width: 100%;">Description</a>
                             <a href="rtl_proposal.html" class="list-group-item">Proposal</a>
                             <a href="rtl_presentation.html" class="list-group-item">Presentation</a>
                             <a href="rtl_documentations.html" class="list-group-item">Documentations</a>
                         </div>
                     
-                        <a href="#demo4" class="list-group-item list-group-item-dark four" data-toggle="collapse" data-parent="#MainMenu">Item 4  <i class="fa fa-caret-down"></i></a>
+                        <a href="#demo4" class="list-group-item list-group-item-success four" data-toggle="collapse" data-parent="#MainMenu">Item 4  <i class="fa fa-caret-down"></i></a>
                         <div class="collapse" id="demo4">
                             <a href="#" class="list-group-item">Subitem 1</a>
                         </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-10"> 
-                    <h2 class="text-center">Real Time Laundry</h2>
-                    <a href="https://github.com/alansong95/Real-Time-Laundry">View source code on GitHub</a>
-                    <h4>What is Real Time Laundry?</h4>
-                    <p>Real Time Laundry is a system that notifies the availability of laundry machines in a public laundry room.</p>
-                    <p>By having Real Time Laundry, people can monitor the availability of laundry machines and plan their trip efficiently to a public laundry room, saving their time and labor.</p>
+                
+                <div class="col-sm-10">
+                    <div class="mt-3 mb-3" align="left"></div>
+                        <p style="margin: 3px 0px; padding:  0px;"><a class="btn btn-primary" href="pdf/rtl_report.pdf" role="button" style="color: #F7F7F7; background: #2D2D2D;">Download Full Report (Korean & English)</a></p>
+                        <p style="margin: 3px 0px; padding:  0px;"><a class="btn btn-primary" href="pdf/rtl_report summary.pdf" role="button" style="color: #F7F7F7; background: #2D2D2D;">Download Short Report (Korean)</a></p>
+                        <p style="margin: 3px 0px; padding:  0px;"><a class="btn btn-primary" href="pdf/rtl_server.pdf" role="button" style="color: #F7F7F7; background: #2D2D2D;">Download Server Report Only (English)</a></p>
                     
-                    <h4>How it works?</h4>
-                    <img class="img-responsive" src="../img/rtl/rtl_process.png" style="max-width: 70%; margin: 0 auto;">
-                    <p>Real Time Laundry consists of a camera and a server.</p>
-                    <p>The camera is installed in a public laundry room, taking pictures of laundry machines every few minutes and sending them to the server via UDP.</p>
-                    <p>The server receives the images and determines how many laundry machines are available with image processing (Laplacian of Gaussian filter) in real time.</p>
-                    <p>The server then posts the information on Real Time Laundry website.</p>
-                    <img class="img-responsive" src="../img/rtl/rtl_process2.png" style="max-width: 70%; margin: 0 auto;">
-                    <br>
 
-                    <h4>Real Time Laundry Website</h4>
-                    <img class="img-responsive" src="../img/rtl/rtl_website.bmp" style="max-width: 70%; margin: 0 auto;">
-                    <br>
-
-                    <h4>Languages/Softwares used</h4>
-                    <ul>
-                        <li>MATLAB</li>
-                        <li>C</li>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>ASP</li>
-                        <li>JavaScript</li>
-                        <li>Python</li>
-                        <li>Flask</li>
-                        <li>Linux</li>
-                        <li>Socket Programming</li>
-                    </ul>
-                    <br>
-
-                    <hr>
-                    <pre style="text-align: left; white-space: pre-line;"> 
-                        &lt;KAIST EE474 Introduction to Multimedia&gt;
-                        &lt;Spring 2016&gt;
-                        &lt;Coded by Alan Wootae Song&gt;
-                    </pre>
-
+                        <div class="embed-responsive" style="padding-bottom: 100%;">
+                            <object class="embed-responsive-item" data="pdf/rtl_report.pdf" type="application/pdf" internalinstanceid="1" title="">
+                                <p>Your browser isn't supporting embedded pdf files. You can download the file
+                                    <a href="pdf/rtl_report.pdf">here</a>.</p>
+                            </object>
+                        </div>
+                    </div>
                 </div>
+                <div class="clearfix visible-md"></div>
             </div>
-
-
+        </div>
+        
         
 
     </div>
     
+
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
