@@ -59,8 +59,6 @@
             </div>
         </nav>
 
-
-
         <div class="row">
             <div class="col-lg-2">      
             <!-- menu -->
@@ -71,6 +69,7 @@
                         <div class="collapse" id="open">
                             <a href="exploration_robot.html" id="side_active" class="list-group-item">Description</a>
                             <a href="er_presentation.html" class="list-group-item">Presentation</a>
+                            <a href="er_documentations.html" class="list-group-item">Documentations</a>
                         </div>
                         <a href="smart_picture_frame.html" class="list-group-item" id="side_link">Smart Picture Frame</a>
                         <a href="smart_vanity.html" class="list-group-item" id="side_link">Smart Vanity</a>
@@ -79,39 +78,125 @@
             </div>
 
             <div class="col-lg-10"> 
-                <h2 class="text-center">Exploration Robot</h2>
-                <a href="https://github.com/alansong95/Real-Time-Laundry">View source code on GitHub</a>
-                <h4>What is Real Time Laundry?</h4>
-                <p>Real Time Laundry is a system that notifies the availability of laundry machines in a public laundry room.</p>
-                <p>By having Real Time Laundry, people can monitor the availability of laundry machines and plan their trip efficiently to a public laundry room, saving their time and labor.</p>
+                <h2 id="sub_head" class="text-center">Exploration Robot</h2>
+                <a href="https://github.com/alansong95/Exploration-Robot">View source code on GitHub</a>
+
+                <div id="toc_container" >
+                    <p class="toc_title">Contents</p>
+                        <li><a href="#toc_key">Key Words</a></li>
+                        <li><a href="#toc_whatis">What is Exploration Robot?</a></li>
+                        <li><a href="#toc_layout">Layout</a></li>  
+                        <ul class="toc_list" id="tocli">
+                            <li><a href="#toc_details">Details</a>
+                                <ul>
+                                    <li><a href="#toc_servos">Servos</a></li>
+                                    <li><a href="#toc_wifi">Wi-Fi</a></li>
+                                    <li><a href="#toc_camera">Camera</a></li>
+                                    <li><a href="#toc_xbox">Xbox Controller</a></li>
+                                </ul>
+                            </li>
+                        <li><a href="#toc_lan">Language/Software used</a></li>
+                        <li><a href="#toc_hard">Hardware used</a></li>
+                        
+                    </ul>
+                </div>
+
+                <h4 id="toc_key">Key Words</h4>
+                <p>BeagleBone, Linux, C, C++, Multithreaded Programming, Socket Programming, UDP, SDL2, Python, Makefile, Shell script, TMR, PWM, real time</p>
+                <br>
+
+                <h4 id="toc_whatis">What is Exploration Robot?</h4>
+                <p>Exploration Robot is a robot that goes to extreme environments that human cannot go to like places exposed to radiation and too small for people. It then gathers information such as video (real-time), temperature, and light intensity, of the area and send it to the base station. </p>
                 
-                <h4>How it works?</h4>
-                <img class="img-responsive" src="../img/rtl/rtl_process.png" id="proj_img">
-                <p>Real Time Laundry consists of a camera and a server.</p>
-                <p>The camera is installed in a public laundry room, taking pictures of laundry machines every few minutes and sending them to the server via UDP.</p>
-                <p>The server receives the images and determines how many laundry machines are available with image processing (Laplacian of Gaussian filter) in real time.</p>
-                <p>The server then posts the information on Real Time Laundry website.</p>
-                <img class="img-responsive" src="../img/rtl/rtl_process2.png" id="proj_img">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img class="img-responsive" src="../img/er/er_top.png" id="proj_img">
+                        <figcaption class="figure-caption text-center">Top view of Exploration Robot</figcaption>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="img-responsive" src="../img/er/er_bot.jpg" id="proj_img">
+                        <figcaption class="figure-caption text-center">Bottom view of Exploration Robot</figcaption>
+                    </div>
+                </div>
+
+                <p>Exploration Robot consists of BeagleBone (runs Ubuntu), Logitech C110 camera, photoresistor, temperature sensor, Wi-Fi dongle, 3 servos, 3 omni wheels, 2 Li-Po Batteries, and DC/DC Converter.</p>
+                <p>The robot is connected to base station via Wi-Fi and is controlled by a wireless Xbox controller.  </p>
+                <p>The robot’s camera sends the video in real time to the base station, which displays the video on a SDL window. You can also save an image by pressing A button on the Xbox controller. </p>
+                <p>Information such as temperature and light intensity is shown in base station’s terminal.</p>
                 <br>
 
-                <h4>Real Time Laundry Website</h4>
-                <img class="img-responsive" src="../img/rtl/rtl_website.bmp" id="proj_img">
+                <h4 id="toc_layout">Layout</h4>
+                <img class="img-responsive" src="../img/er/er_layout.png" id="proj_img">
                 <br>
 
-                <h4>Languages/Softwares used</h4>
+                <p><strong>commander3.cpp</strong> (2 threads): Deals with external commands (Xbox controller), send commands to the robot via UDP, receives images from the robot and displays them in real time, and displays sensor information.</p>
+                <p><strong>Send_UDPs.c</strong>: Send images to the base station via UDP every 1 second.</p>
+                <p><strong>Capture2.c</strong>: Captures images</p>
+                <p><strong>Control_TMR_Bone.c</strong>: Receives commands from base station via UDP and controls the robot’s movement accordingly.</p>
+                <br>
+
+                <h4 id="toc_details">Details</h4>
+                <h5 id="toc_servos">Servos</h5>
+                <img class="img-responsive" src="../img/er/er_circuit.png" id="proj_img">
+                <br>    
+                <p>The servos are controlled via PWM signals generated by the BeagleBone. 
+                    Each servo’s dead band was measured and recorded as below:
+                    </p>
+                <img class="img-responsive" src="../img/er/er_chart.png" id="proj_img">
+                <p>Controlled by:</p>
                 <ul>
-                    <li>MATLAB</li>
+                    <li>Control_TMR_Bone.c</li>
+                </ul>
+                <br>
+
+                <h5 id="toc_wifi">Wi-Fi</h5>
+                <p>A Wi-Fi dongle is connected to the BeagleBone’s USB slot. Then, WPA is setup for the security. After configuring the interface file, the WiFi-driver is manually started. </p>
+                <p>The base station and the robot communicate via UDP/IP. </p>
+                <p>The system uses two different ports for the communication: one for controlling servo and one for receiving video and images </p>
+                <p>Socket programming in C and C++ are used for this purpose.</p>
+                <p>Used in:</p>
+                <ul>
+                    <li>commander3.cpp</li>
+                    <li>Send_UDPs.c</li>
+                    <li>Control_TMR_Bone.c</li>
+                </ul>
+                <br>
+
+                <h5 id="toc_camera">Camera</h5>
+                <p>Logitech C110 camera is connected to the BeagleBone’s usb slot. The robot shoots video and send it in real time via UDP/IP to the base station in real time. The video is then shown on base station’s SDL window.</p>
+                <br>
+
+                <h5 id="toc_xbox">Xbox Controller</h5>
+                <img class="img-responsive" src="../img/er/er_chart.png" id="proj_img">
+                <p>The Xbox controller is connected to the base station. When a button is pressed, commander3.cpp sends an appropriate command to the BeagleBone (handled by SDL_Event). </p>
+                <br>
+                
+                <h4 id="toc_lan">Language/Software used</h4>
+                <ul>
                     <li>C</li>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>ASP</li>
-                    <li>JavaScript</li>
+                    <li>C++</li>
                     <li>Python</li>
-                    <li>Flask</li>
+                    <li>SDL2</li>
                     <li>Linux</li>
+                    <li>Makefile</li>
+                    <li>Shell script</li>
+                    <li>Multithreaded Programming</li>
                     <li>Socket Programming</li>
                 </ul>
                 <br>
+
+                <h4 id="toc_hard">Hardware used</h4>
+                <ul>
+                    <li>BeagleBone</li>
+                    <li>Temperature sensor</li>
+                    <li>Photo cell</li>
+                    <li>DC/DC Converter</li>
+                    <li>Logitech C110 camera</li>
+                    <li>Servos</li>
+                    <li>Xbox controller</li>
+                </ul>
+                
+                 
 
                 <hr>
                 <pre id="end_comment"> 

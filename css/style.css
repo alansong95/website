@@ -1,6 +1,9 @@
+#debug {
+    border: 5px solid red ;
+}
 /* logo */
 #intro {
-    padding: 100px;
+    padding: 80px;
     border: 2px solid #2D2D2D;
     margin: 1px 0px;
     text-align: center;
@@ -64,7 +67,6 @@ footer {
     max-width: 70%; 
     margin: 0 auto;
 }
-
 
 
 /* Top button */
@@ -164,3 +166,36 @@ hr{
     float: right;
     padding-right: 8px;
   }
+
+#toc_container {
+    background: #f9f9f9 none repeat scroll 0 0;
+    border: 1px solid #aaa;
+    display: table;
+    font-size: 95%;
+    margin-bottom: 1em;
+    padding: 20px;
+    width: auto;
+}
+
+.toc_title {
+    font-weight: 700;
+    text-align: center;
+}
+
+#toc_container li, #toc_container ul, #toc_container ul li{
+    list-style: outside none none !important;
+}
+
+#tocli {
+    margin: 0; padding: 0;
+}
+
+#sub_head {
+    margin: 2px 0px;
+    padding: 30px;
+    border: 2px solid #2D2D2D;
+}
+
+.col-lg-10 {
+    padding-left: 0;
+}
