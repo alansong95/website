@@ -1,4 +1,19 @@
 /* logo */
+#intro {
+    padding: 100px;
+    border: 2px solid #2D2D2D;
+    margin: 1px 0px;
+    text-align: center;
+}
+
+#intro h1 {
+    margin: 0 auto;
+    background: #2D2D2D;
+    color: white;
+    padding: 20px;
+    display: inline-block;
+}
+
 #logo {
     width: 75px;
 }
@@ -49,8 +64,6 @@ footer {
     max-width: 70%; 
     margin: 0 auto;
 }
-
-
 
 
 
