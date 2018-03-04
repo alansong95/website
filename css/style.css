@@ -195,3 +195,7 @@ hr{
     padding: 30px;
     border: 2px solid #2D2D2D;
 }
+
+#code {
+    font-family: monospace;
+}
