@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
-    <title>Exploration Robot - Alan W. Song</title>
+    <title>Smart Vanity - Alan W. Song</title>
     <link rel="icon" href="../img/logo.png">
   </head>
 
@@ -59,8 +59,6 @@
             </div>
         </nav>
 
-
-
         <div class="row">
             <div class="col-lg-2">      
             <!-- menu -->
@@ -68,55 +66,139 @@
                     <div class="list-group list-group-flush" id="sidenav">
                         <a href="real_time_laundry.html" class="list-group-item three" id="side_link">Real Time Laundry</a>
                         <a href="exploration_robot.html" class="list-group-item" id="side_link">Exploration Robot</a>
-                        <div class="collapse" id="open">
-                            <a href="exploration_robot.html" id="side_active" class="list-group-item">Description</a>
-                            <a href="er_presentation.html" class="list-group-item">Presentation</a>
-                        </div>
                         <a href="smart_picture_frame.html" class="list-group-item" id="side_link">Smart Picture Frame</a>
                         <a href="smart_vanity.html" class="list-group-item" id="side_link">Smart Vanity</a>
+                        <div class="collapse" id="open">
+                            <a href="smart_vanity.html" id="side_active" class="list-group-item">Description</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-10"> 
-                <h2 class="text-center">Exploration Robot</h2>
-                <a href="https://github.com/alansong95/Real-Time-Laundry">View source code on GitHub</a>
-                <h4>What is Real Time Laundry?</h4>
-                <p>Real Time Laundry is a system that notifies the availability of laundry machines in a public laundry room.</p>
-                <p>By having Real Time Laundry, people can monitor the availability of laundry machines and plan their trip efficiently to a public laundry room, saving their time and labor.</p>
+                <!-- <h2 id="sub_head" class="text-center">Smart Vanity</h2> -->
+                <img src="../img/sv/sv_banner.png" id="sub_head" style="padding: 0px">
+                <a href="https://github.com/alansong95/SmartVanity">Smartphone App Source Code</a>
+                <br>
+                <a href="https://github.com/alansong95/SmartVanity-SBC">Mirror SBC App Source Code</a>
                 
-                <h4>How it works?</h4>
-                <img class="img-responsive" src="../img/rtl/rtl_process.png" id="proj_img">
-                <p>Real Time Laundry consists of a camera and a server.</p>
-                <p>The camera is installed in a public laundry room, taking pictures of laundry machines every few minutes and sending them to the server via UDP.</p>
-                <p>The server receives the images and determines how many laundry machines are available with image processing (Laplacian of Gaussian filter) in real time.</p>
-                <p>The server then posts the information on Real Time Laundry website.</p>
-                <img class="img-responsive" src="../img/rtl/rtl_process2.png" id="proj_img">
+
+                <div id="toc_container" >
+                    <p class="toc_title">Contents</p>
+                        <li><a href="#toc_key">Key Words</a></li>
+
+                        <ul class="toc_list" id="tocli">
+                            <li><a href="#toc_1">About Smart Vanity</a>
+                                <ul>
+                                    <li><a href="#toc_2">Motivation</a></li>
+                                    <li><a href="#toc_3">Objective</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="toc_list" id="tocli">
+                            <li><a href="#toc_4">Features</a>
+                                <ul>
+                                    <li><a href="#toc_5">Choose Widgets</a></li>
+                                    <li><a href="#toc_6">Video</a></li>
+                                    <li><a href="#toc_7">Companion Mobile App</a></li>
+                                    <li><a href="#toc_8">Display</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <li><a href="#toc_lan">Language/Software used</a></li>
+                        <li><a href="#toc_hard">Hardware used</a></li>                
+                </div>
+
+                <h4 id="toc_key">Key Words</h4>
+                <p>Smart Vanity, Smart Mirror, Android, Java, Firebase, Udoo x86</p>
                 <br>
 
-                <h4>Real Time Laundry Website</h4>
-                <img class="img-responsive" src="../img/rtl/rtl_website.bmp" id="proj_img">
+                <h4 id="toc_1">About Smart Vanity</h4>
+                <p>The way to obtain a quality magic mirror is to build one yourself. This means that the average consumer lacks needed expertise to construct and program a mirror. In other words, for the foreseeable future the magic mirror is a project, not a product. The motivation of this project is to take a step towards making this a viable product that a consumer with limited technological capability can purchase and use with ease.</p>
+                <p>The SmartVanity Mirror is a consumer-friendly smart mirror that displays relevant information to the user, allowing the user to both place desired widgets where they want to the mirror and push videos from YouTube to the mirror using their smartphone.</p>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img class="img-responsive" src="../img/sv/sv_01.png" id="proj_img"> 
+                        <figcaption class="figure-caption text-center">Smart Vanity displaying widgets</figcaption>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="img-responsive" src="../img/sv/sv_02.png" id="proj_img">
+                        <figcaption class="figure-caption text-center">Smart Vanity displaying a video</figcaption>
+                    </div>
+                </div>
                 <br>
 
-                <h4>Languages/Softwares used</h4>
+
+                <h5 id="toc_2">Motivation</h5>
+                <p>The only way to obtain a quality magic mirror is to build one yourself. This means that the average consumer lacks the needed expertise to construct and program a mirror, even though there are tutorials available online which simplify this project. In other words, for the foreseeable future the magic mirror is a project, not a product. The motivation of this project was to take a step towards making this a viable product that a consumer with limited technological capability can purchase and use with ease.</p>
+                <p>To enumerate this motivation, Smart Vanity must make the project convenient to use on a daily basis, easy to setup, and feature rich. This will drive up consumer desire for the product while also ensuring most users will possess the necessary knowledge to operate the mirror. Smart Vanity improves the convenience for the user over existing prototypes by providing a user-friendly interface, offering a customizable solution, and allowing control through the use of a smartphone. Ease of setup is handled through a companion smartphone app which feels familiar to anyone who uses smartphone apps on a regular basis. The mirror features speakers, microphones, and an SBC capable of giving the Smart Vanity mirror features like YouTube video streaming capability, voice command operation, weather notifications and recommendations, and music playback, among others.</p>
+                <p>In addition to the customizability of the widgets to display information relevant to the user, the mirror also allows YouTube videos to be pushed by simply finding the desired video and using the built-in share functionality already included in the YouTube app. Though this may seem a trivial feature, given the use of various makeup and hairstyling tutorials on YouTube, the Smart Vanity mirror meets a major need by implementing this solution for many potential buys.</p>
+                <br>
+
+                <h5 id="toc_3">Objective</h5>
+                <p>The objective of Smart Vanity was to create a smart mirror for consumers who are not technologically inclined. Figure 1 shows a block diagram of the Smart Vanity system communications between the user and the mirror. The smartphone app sends commands to the mirror through Wi-Fi. Then the single board computer (SBC) then executes the command using Wi-Fi. Setting up the mirror is handled with the various controllers made accessible to the user via the smartphone app. The commands capable of being executed by the SBC using the smartphone app include widget selection, sizing, and placement as well as playing pushed YouTube videos.</p>
+                <img class="img-responsive" src="../img/sv/sv_04.bmp" id="proj_img">
+                <br>
+
+                <h4 id="toc_4">Features</h4>
+                <h5 id="toc_5">Choose Widgets</h5>
+                <p>Select any Android widgets installed on your smartphone such as the clock, weather, Gmail, ESPN to name a few. After selecting the widget you wish to use go ahead and select the size you would like the widget and its placement on the display in relation to other apps you are using.</p>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/LmI8mqZ8g40" allowfullscreen></iframe>
+                </div>
+                <br>
+
+                <h5 id="toc_6">Video</h5>
+                <p>Play any YouTube video that you would like by simply sharing the video to the Smart Vanity display. Also allow the accompanying video controller to assist you while viewing.</p>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0NcFeSGjQN0" allowfullscreen></iframe>
+                </div>
+                <br>
+                <p>The accompanying video controller allows you to change the volume, jump to a specific section of the video, and pause, resume, and end the video.</p>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9FuOCVfLLzo" allowfullscreen></iframe>
+                </div>
+                <br>
+
+                <h5 id="toc_7">Companion Mobile App</h5>
+                <p>Register to our wonderful mobile app that will assist the user in the selecting and placement of the widgets they choose. In addition the app will store personalized setting for the user's comfort.</p>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img class="img-responsive" src="../img/sv/sv_05.jpg" id="proj_img"> 
+                        <figcaption class="figure-caption text-center">Login screen of the mobile app</figcaption>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="img-responsive" src="../img/sv/sv_06.jpg" id="proj_img">
+                        <figcaption class="figure-caption text-center">Main screen of the mobile app</figcaption>
+                    </div>
+                </div>
+                <br>
+
+                <h5 id="toc_8">Display</h5>
+                <p>The display is mounted on top of the mirror on the backside with the aid of supports. This entire unit is housed in a dark wood finished housing which blends it in and makes it seem like any regular mirror.</p>
+
+
+                
+                <h4 id="toc_lan">Language/Software used</h4>
                 <ul>
-                    <li>MATLAB</li>
-                    <li>C</li>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>ASP</li>
-                    <li>JavaScript</li>
-                    <li>Python</li>
-                    <li>Flask</li>
-                    <li>Linux</li>
-                    <li>Socket Programming</li>
+                    <li>Java</li>
+                    <li>Android</li>
+                    <li>Firebase</li>
                 </ul>
                 <br>
 
+                <h4 id="toc_hard">Hardware used</h4>
+                <ul>
+                    <li>Udoo x86</li>
+                </ul>             
+
                 <hr>
                 <pre id="end_comment"> 
-                    &lt;KAIST EE405 Electronic Design Lab&gt;
-                    &lt;Spring 2016&gt;
+                    &lt;Georgia Institute of Technology Senior Design&gt;
+                    &lt;Spring 2018&gt;
                     &lt;Coded by Alan Wootae Song&gt;
                 </pre>
 
@@ -127,7 +209,6 @@
         </footer>
     </div>
     
-
     <script src="../js/projects.js"></script>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
