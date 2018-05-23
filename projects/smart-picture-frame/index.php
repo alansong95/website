@@ -31,7 +31,7 @@
 
                 <div class="col-lg-10"> 
                     <?php
-                        include('contents.html');
+                        include('content.html');
                     ?>
                 </div>
             </div>

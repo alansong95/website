@@ -1,0 +1,140 @@
+<h2 id="sub_head" class="text-center">Smart Picture Frame</h2>
+
+<div id="toc_container" >
+    <p class="toc_title">Contents</p>
+        <ul class="toc_list" id="tocli">
+            <li><a href="#toc_one">Network Part</a>
+                <ul>
+                    <li><a href="#toc_two">Set Up Your AWS IoT</a></li>
+                    <li><a href="#toc_thr">Set Up Your Lambda Function</a></li>
+                    <li><a href="#toc_fou">Set Up Your Alex Skill</a></li>
+                    <li><a href="#toc_fiv">Set Up Your Node-RED Server</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="toc_list" id="tocli">
+            <li><a href="#toc_six">Camera and Display</a>
+                <ul>
+                    <li><a href="#toc_sev">Camera.cpp</a></li>
+                    <li><a href="#toc_eig">SDL_Display.cpp</a></li>
+                </ul>
+            </li>
+        </ul>
+        <li><a href="#toc_nin">Setting Up the Device</a></li>
+        <li><a href="#toc_ten">Testing the Device</a></li>    
+</div>
+
+
+<h4 id="toc_one">Network Part</h4>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/diagram_network_design.png" id="proj_img">
+<p>When you speak to Smart Picture Frame, Echo Dot catches your command and sends it to Amazon’s server. Smart Picture Frame’s Alexa skill then checks your command and sends Lambda request to Smart Picture Frame’s Lambda function that is on Amazon AWS. Then, Lambda function generates response back to the Alexa skill, which generates a response message and send it back to the Echo Dot. Then, you will hear the response from your Echo Dot. The Lambda function also publishes MQTT message to Amazon’s AWS IoT. It then captures the message and sends MQTT message in JSON format. Then, the NODE-RED server that is running on Raspberry Pi catches the message and writes the message to a file. We can control our Raspberry Pi according to the message.
+    </p>
+<br>
+
+<h5 id="toc_two">Set Up Your AWS IoT</h5>
+<p>Create an Amazon developer account. Then, go to Amazon’s AWS website: <a href="https://aws.amazon.com">https://aws.amazon.com</a>. Sign in and go to AWS IoT page. Click on “Registry” and then “Things” on the left tab. Click on create to create your “Things”. </p>
+<p>Give your “Thing” a name and click on create thing.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup1.png" id="proj_img">
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup2.png" id="proj_img">
+<p>Click on security on the left tab and click Create certificate.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup3.png" id="proj_img">
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup4.png" id="proj_img">
+<p>Download a certificate for this thing, a public key, and private key and save them to Raspberry Pi’s ~/certs directory. Also, download a root CA for AWS IoT. Create a file name root-CA.pem and copy paste the contents of the root CA. Then, click Activate.</p>
+<br>
+
+<h5 id="toc_thr">Set Up Your Lambda Function</h5>
+<p>Go to Lambda page on Amazon’s AWS website: <a href="https://aws.amazon.com">https://aws.amazon.com</a>. Then, click on Create a Lambda function. Click on “Configure triggers” on the left tab.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup5.png" id="proj_img">
+<p>Click on the box and select “Alexa Skills Kit”. Then, click Next.</p>
+<p>If you do not see “Alexa Skills Kit” option, look at the top right corner and make sure that the region is set to “N.Virginia”.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup6.png" id="proj_img">
+<p>Give your Lambda function a name, description, and change the Runtime* to Node.js 4.3.</p>
+<p>Then, for the “Code entry type”, select “Upload a .ZIP file”. Then upload “Lambda.zip” that is provided.</p>            
+<p>Then, for the Role*, select “Create a custom role”.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup7.png" id="proj_img">
+<p>Modify your entry as above and click Allow.</p>
+<p>Then, click Next.</p>  
+<p>Review your Lambda function and click “Create function”.</p>
+<p>Click on “Functions” on left tab and click on your function.</p>                  
+<p>On top, right corner, you will see the ARN for your function. Copy this as you will need it later.</p>
+<br>
+
+<h5 id="toc_fou">Set Up Your Alex Skill</h5>
+<p>Go to Amazon Developer website: <a href="https://aws.amazon.com">https://aws.amazon.com</a>. Sign in and click on Alexa tab.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup8.png" id="proj_img">
+<p>Click on Get Started for Alexa Skills Kit. Then, click on Add a New Skill.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup9.png" id="proj_img">
+<p>Fill out the form and click Save. Then, click Next.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup10.png" id="proj_img">
+<p>For Intent Schema input the following:</p>
+
+<pre id="code">
+{
+"intents": [                        
+{                          
+"intent": "TakePictureIntent"                         
+},                       
+{               
+"intent": "NextPictureIntent"                          
+},                        
+{                       
+"intent": "PrevPictureIntent"                     
+},                
+{              
+"intent": "AMAZON.HelpIntent"                         
+}                        
+]                      
+}
+</pre>
+<p>For Sample Utterances input the following:</p>
+<pre id="code">
+TakePictureIntent take picture
+TakePictureIntent take pic                       
+TakePictureIntent cheese                     
+NextPictureIntent next picture                        
+NextPictureIntent next pic                        
+NextPictureIntent next                        
+PrevPictureIntent previous picture                        
+PrevPictureIntent previous pic                        
+PrevPictureIntent previous                    
+</pre>
+
+<p>Then, click Next.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup11.png" id="proj_img">
+<p>Set the settings as above picture and put in your Lambda ARN number. Then, click Next.</p>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/setup12.png" id="proj_img">
+<p>You can test the code by entering utterance into the test box. Type in “Take picture” and see what happens.</p>
+<br>
+
+<h5 id="toc_fiv">Set Up Your Node-RED Server</h5>
+<p>Download Node-RED on your raspberry pi by referring to following link: <a href="http://nodered.org/docs/getting-started/installation.html">http://nodered.org/docs/getting-started/installation.html</a></p>
+<p>Also, download Node-RED dashboard and MQTT by referring to this video:</p>
+<a href="https://www.youtube.com/watch?v=fV78MQks6BI&t=230s">https://www.youtube.com/watch?v=fV78MQks6BI&t=230s</a>
+<br>
+
+<p>start your node-red server by typing: ./node-red-start on Raspberry Pi’s terminal. Then, open a browser and type in 127.0.0.1:1880/#.</p>
+<p>Then, configure your server as seen in this video:</p>
+<a href="https://www.youtube.com/watch?v=CIi01OG8G0o&t=">https://www.youtube.com/watch?v=CIi01OG8G0o&t=</a>
+<br>
+
+<h4 id="toc_six">Camera and Display</h4>
+<img class="img-responsive" src="/projects/smart-picture-frame/img/diagram_cam_design.png" id="proj_img">
+<p>Two different programs are running for camera and display: camera.cpp and sdl_display.cpp. Camera.cpp polls the file that Node-RED server writes. If the user commands TakePictureIntent, camera.cpp will take a picture and produce image.ppm file. Also, it will write to a second file the result. Sdl_display.cpp polls the file that camera.cpp writes. If camera.cpp takes a picture, it then converts the picture by executing ppm2bmp program. We need to convert the ppm file to bmp file because SDL cannot read ppm file. We then read the converted image file and display it to the physical screen.</p>
+<br>
+
+<h5 id="toc_sev">Camera.cpp</h5>
+<p>Download “Camera.zip” and extract it to ~/Desktop/camera. Open up a terminal and change directory to camera/build and type cmake . on the terminal. Then, type in make to compile. Then you will get an executable file called simpletest_raspicam. Execute the program by typing ./ simpletest_raspicam.</p>
+<br>
+
+<h5 id="toc_eig">SDL_Display.cpp</h5>
+<p>Open up another terminal and.Change directory to camera/build/sdl_display. Type make to compile. Then, you will get an executable file named sdl_display. Execute the program.</p>
+<br>
+
+<h4 id="toc_nin">Setting Up the Device</h4>
+<p>Connect a monitor to your Raspberry Pi using an HDMI cable. Then, connect the Raspberry Pi Camera by referring to this link: <a href="https://www.raspberrypi.org/learning/getting-started-with-picamera/">https://www.raspberrypi.org/learning/getting-started-with-picamera/</a>.</p>
+<br>
+
+<h4 id="toc_ten">Testing the Device</h4>
+<p>Download Android Alexa app on your phone and launch it. Sign in with the same developer account you used to create the Alexa skill. Then, open the skill by saying , “Alexa open yourSkillName”. Then, you can say utterances that you listed when you created your skill. Try saying “Take a picture” and see what happens. (Make sure your Node-RED Server is running when you are testing)</p>
+<br>
+

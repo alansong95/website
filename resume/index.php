@@ -14,7 +14,7 @@
                 include($path . '/templates/header.html');
                 include($path . '/templates/buttons.html');
                 include($path . '/templates/top_nav.html');
-                include('contents.html');
+                include('content.html');
                 include($path . '/templates/footer.html');
             ?>
         </div>
