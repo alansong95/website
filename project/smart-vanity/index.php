@@ -24,13 +24,13 @@
                 <script>
                     // sidenav 
                     $('li#top_nav_projects').addClass('active');
-                    $('div#smart_vanity_menu > div.collapse').attr('id', 'open');
-                    $('div#smart_vanity_menu > div.collapse > a.des').attr('id', 'side_active');
+                    $('div#side_nav_smart_vanity > div.collapse').attr('id', 'open');
+                    $('div#side_nav_smart_vanity > div.collapse > a.des').attr('id', 'side_active');
                 </script>
 
                 <div class="col-lg-10"> 
                     <?php
-                        include('content.html');
+                        include('contents.html');
                     ?>
                 </div>
             </div>
